@@ -5,4 +5,12 @@ html body {
 .jumbotron {
   background-color: blue;
 }
+.table-striped > tbody > tr:nth-child(2n+1) > td,
+.table-striped > tbody > tr:nth-child(2n+1) > th {
+  background-color: blue;
+  font-weight: bold;
+}
+table {
+  color: greenyellow;
+}
 /*# sourceMappingURL=recipedesign.css.map */

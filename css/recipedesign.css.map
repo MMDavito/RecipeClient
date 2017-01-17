@@ -1,1 +1,1 @@
-{"version":3,"sources":["../less/recipedesign.less"],"names":[],"mappings":"AAAA,IAAK;EAAK,uBAAA;EACA,YAAA;;AACV;EAAW,sBAAA","file":"recipedesign.css"}
+{"version":3,"sources":["../less/recipedesign.less"],"names":[],"mappings":"AAAA,IAAK;EAAK,uBAAA;EACA,YAAA;;AACV;EAAW,sBAAA;;AACX,cAAe,QAAQ,KAAI,UAAU,MAAO;AAAM,cAAe,QAAQ,KAAI,UAAU,MAAO;EAC3F,sBAAA;EACA,iBAAA;;AAEH;EAAM,kBAAA","file":"recipedesign.css"}
