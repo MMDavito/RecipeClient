@@ -28,6 +28,17 @@ module.service("recipeService", function ($q, $http, $rootScope) {
         });
     };
     this.fillRecipe = function (id) {
-        console.log(id);    
+        console.log("id of filler " + id); 
+        return "blehe";
+};
+this.getRecipeIngs = function (id){
+    console.log("you should get ings of id "+id);
+    var deffer = $q.defer();
+        var url = "http://localhost:8080/RecipeServer.0.1/webresources/recipe/"+id;
+        console.log(url);
+        $http.get(url).then(function (data) {
+            deffer.resolve(data);
+        });
+        return deffer.promise;
 };
 });
