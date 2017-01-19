@@ -14,7 +14,7 @@ module.config(function ($urlRouterProvider, $stateProvider) {
         controller: "loginCtrl"
     });
 });
-module.controller("homeCtrl", function ($scope, $rootScope, recipeService, $window,$state) {
+module.controller("homeCtrl", function ($scope, $rootScope, recipeService, $window, $state) {
     var promise = recipeService.getRecipes();
     promise.then(function (data) {
         $scope.recipes = data.data;
@@ -22,21 +22,25 @@ module.controller("homeCtrl", function ($scope, $rootScope, recipeService, $wind
     });
     $scope.fillRecipe = function (id) {
         $rootScope.id = id;
-        console.log("WindoWWW " +$window.location.href);
+        console.log("WindoWWW " + $window.location.href);
         $state.transitionTo('recipe');
     };
 });
 module.controller("loginCtrl", function ($scope, $rootScope, recipeService) {
     $scope.loggIn = function () {
         console.log("du komer till login");
-        recipeService.loggIn($scope.username, $scope.password);
+        /*var promise = */recipeService.loggIn($scope.username, $scope.password);
+
+        /*promise.then(function (data) {
+            console.log(data.data);
+        });*/
     };
 });
 module.controller("recipeCtrl", function ($scope, $rootScope, recipeService) {
-    console.log("recipeCTRL" +$rootScope.id);
-        var promise = recipeService.getRecipeIngs($rootScope.id);
-        promise.then(function (data) {
-            console.log(data.data);
-            $scope.recipe = data.data;
+    console.log("recipeCTRL" + $rootScope.id);
+    var promise = recipeService.getRecipeIngs($rootScope.id);
+    promise.then(function (data) {
+        console.log(data.data);
+        $scope.recipe = data.data;
     });
 });
