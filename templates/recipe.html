@@ -1,4 +1,10 @@
-<div class="recipe">
-    <h3>Here you may eat your favorite desert</h3>
-    
+<div class="recipe" ng-repeat="info in recipe">
+    <h3>Make: {{info.recipe['name']}}</h3>
+    <p>You will need to:<br/>
+        {{info.recipe.instruction}}
+    </p>
+    <p>And for that you will need</p>
+    <ul>
+        <li ng-repeat="ing in info.ingredients">{{ing['amount_ing']}}:{{ing['name_ing']}}</li>
+    </ul>
 </div>

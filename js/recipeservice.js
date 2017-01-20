@@ -51,4 +51,34 @@ module.service("recipeService", function ($q, $http, $rootScope) {
         });
         return deffer.promise;
     };
+    this.getIngs = function (){
+        console.log("you should get all ings in ing-table");
+        var deffer = $q.defer();
+        var url = "http://localhost:8080/RecipeServer.0.1/webresources/ingredients";
+        console.log(url);
+        $http.get(url).then(function (data) {
+            deffer.resolve(data);
+        });
+        return deffer.promise;
+        
+    };
+    this.addIng = function (name, info){
+        var data = {
+            name: name,
+            information: info
+        };
+        console.log(data);
+        var url = "http://localhost:8080/RecipeServer.0.1/webresources/ingredient";
+        var auth = "Basic " + window.btoa($rootScope.user + ":" + $rootScope.pass);
+        console.log(auth);
+        $http({
+            url: url,
+            method: "POST",
+            data: data,
+            headers: {'Authorization': auth}}).then(function (data, status) {
+            console.log(data);
+            console.log(status);
+            console.log("Fixade Att lägga in ing");
+        });
+    };    
 });

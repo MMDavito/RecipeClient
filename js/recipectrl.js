@@ -8,6 +8,10 @@ module.config(function ($urlRouterProvider, $stateProvider) {
         url: "/recipe/",
         templateUrl: "templates/recipe.html",
         controller: "recipeCtrl"
+    }).state("addrecipe", {
+        url: "/addrecipe",
+        templateUrl: "templates/addrecipe.html",
+        controller: "addrecipeCtrl"
     }).state("login", {
         url: "/login",
         templateUrl: "templates/login.html",
@@ -32,8 +36,8 @@ module.controller("loginCtrl", function ($scope, $rootScope, recipeService) {
         /*var promise = */recipeService.loggIn($scope.username, $scope.password);
 
         /*promise.then(function (data) {
-            console.log(data.data);
-        });*/
+         console.log(data.data);
+         });*/
     };
 });
 module.controller("recipeCtrl", function ($scope, $rootScope, recipeService) {
@@ -42,5 +46,30 @@ module.controller("recipeCtrl", function ($scope, $rootScope, recipeService) {
     promise.then(function (data) {
         console.log(data.data);
         $scope.recipe = data.data;
+        console.log($scope.recipe);
+        console.log("efterSkiten");
     });
+});
+module.controller("addrecipeCtrl", function ($scope, $rootScope, recipeService) {
+    var promise = recipeService.getIngs();
+    promise.then(function (data) {
+        $scope.ingredients = data.data;
+        console.log($scope.ingredients);
+        console.log("efterSkiten");
+    });
+    $scope.loggIn = function () {
+        console.log("du komer till login");
+        recipeService.loggIn($scope.username, $scope.password);
+    };
+    $scope.addIng = function () {
+        console.log("I see that you want to add recipe");
+        if(!$scope.modalIngName){
+            return;
+        }if(!$scope.modalIngInfo){
+            $scope.modalIngInfo = "";
+        }
+        
+        console.log($scope.modalIngName, $scope.modalIngInfo);
+        recipeService.addIng($scope.modalIngName, $scope.modalIngInfo);
+    };
 });
