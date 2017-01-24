@@ -51,7 +51,7 @@ module.service("recipeService", function ($q, $http, $rootScope) {
         });
         return deffer.promise;
     };
-    this.getIngs = function (){
+    this.getIngs = function () {
         console.log("you should get all ings in ing-table");
         var deffer = $q.defer();
         var url = "http://localhost:8080/RecipeServer.0.1/webresources/ingredients";
@@ -60,9 +60,18 @@ module.service("recipeService", function ($q, $http, $rootScope) {
             deffer.resolve(data);
         });
         return deffer.promise;
-        
     };
-    this.addIng = function (name, info){
+    this.getCats = function () {
+        console.log("trying to get cats.");
+        var deffer = $q.defer();
+        var url = "http://localhost:8080/RecipeServer.0.1/webresources/categories";
+        console.log(url);
+        $http.get(url).then(function (data) {
+            deffer.resolve(data);
+        });
+        return deffer.promise;
+    };
+    this.addIng = function (name, info) {
         var data = {
             name: name,
             information: info
@@ -80,5 +89,9 @@ module.service("recipeService", function ($q, $http, $rootScope) {
             console.log(status);
             console.log("Fixade Att lägga in ing");
         });
-    };    
+    };
+    this.listIngs = function (list, ing, amount) {
+        list.push(ing + " " + amount + "-");
+        return list;
+    };
 });

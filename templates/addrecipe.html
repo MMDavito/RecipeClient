@@ -8,30 +8,49 @@
     </form></div>
 
 <div ng-show="isLoggedIn">
-    <div>Here you give me the secret recipe to cake</div>
-    <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Change</button>
-    <form>
+    <div>Here you give me the secret recipe to cake</div>    
+    <button class="btn btn-success" data-toggle="modal" data-target="#myModal">New Ing</button>
+    <button class="btn btn-success" data-toggle="modal" data-target="#myModal2">New Cat</button>
+    
+    <form ng-submit="addRecipe()">
         <ul class="form-style-1 formLi">
-            <li><label>Full Name <span class="required">*</span></label><input type="text" name="field1" class="field-divided" placeholder="First" />
-                &nbsp;<input type="text" name="field2" class="field-divided" placeholder="Last" /></li>
+            <li><label>Name and catagory of recipe <span class="required">*</span>
+                </label><input type="text" name="field1" class="field-divided" placeholder="Name" maxlength="50"ng-model="ingName"/>
+            </li>
+            <li><select name="fieldcat" class="field-select" ng-model="cat">
+                    <option ng-repeat="cat in categories" value="{{cat.cat_id}}">{{cat.cat_name}}</option>
+                </select></li>
             <li>
-                <label>Email <span class="required">*</span></label>
-                <input type="email" name="field3" class="field-long" />
+                <label>Image Source </label>
+                <input type="text" name="field3" class="field-long" ng-model="image"/>
             </li>
             <li>
-                <label>Subject</label>
-                <select name="field4" class="field-select" ng-model="vald">
+                <label>Ingredient Information <span class="required">*</span></label>
+                <select name="field4" class="field-select" ng-model="ingred">
                     <option ng-repeat="ing in ingredients" value="{{ing.id}}">{{ing.name}}</option>
-                </select><input class="field4Input" type="text" maxlength="6" size="4">
+                </select><input class="field4Input" type="text" maxlength="6" size="6" ng-model="amount" placeholder="Amount">
             </li>
             <li>
-                <label>Your Message <span class="required">*</span></label>
-                <textarea name="field5" id="field5" class="field-long field-textarea"></textarea>
+                <button class="btn btn-default" ng-click="listIngs()">Add Ing</button>
+            </li>
+            <li>
+                <label>Instructions <span class="required">*</span></label>
+                <textarea name="field5" id="field5" class="field-long field-textarea" maxlength="2000" ng-model="ingInstruction"></textarea>
+                <label>Short summary</label>
+                <label><textarea name="field6" id="field6" class="field-long field-textarea-short" maxlength="100" ng-model="recipeInfo"></textarea></label>
+            </li>
+            <li>
+                <button class="btn btn-danger" ng-click="emptyList()">Empty List from ings</button>
             </li>
             <li>
                 <input type="submit" value="Submit" />
             </li>
-            <li>test {{vald}}</li>
+            <h3 id="errors" ng-model="errors"></h3>
+            <li>test {{ingred}}:{{amount}}</li>
+            <li>List of ings {{inglist2}}</li>
+            <ul ng-repeat="ing in">
+                <li></li>
+            </ul>
         </ul>
     </form>
 </div>
@@ -46,12 +65,38 @@
             <div class="modal-body">
 
                 <form ng-submit="addIng()">
-                    <span><span class="distance"><label><span class="ing">Name of ing</span><input type="text" class="inputIngAdd" ng-model="modalIngName">
+                    <span><span class="distance"><label><span class="ing">Name of ing</span><input type="text" maxlength="50" class="inputIngAdd" ng-model="modalIngName">
                             </label></span><br/>
-                    <label><span class="ing">Info about ing</span><input type="text" class="inputIngAdd" ng-model="modalIngInfo">
-                            </label>
-                        </span>
-                    
+                        <label><span class="ing">Info about ing</span><input type="text" class="inputIngAdd" maxlength="100" ng-model="modalIngInfo">
+                        </label>
+                    </span>
+
+                    <br/>
+                    <div class="modal-footer">
+                        <input type="submit" value="Add Ing" class="btn btn-block btn-info"/>
+                    </div></form>
+            </div>
+
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add an category((this has no function yet))</h4>
+            </div>
+            <div class="modal-body">
+
+                <form ng-submit="addCat()">
+                    <span><span class="distance"><label><span class="ing">Name of category</span><input type="text" class="inputIngAdd" maxlength="30" ng-model="modalCatName">
+                            </label></span><br/>
+
+                    </span>
+
                     <br/>
                     <div class="modal-footer">
                         <input type="submit" value="Add Ing" class="btn btn-block btn-info"/>
