@@ -12,7 +12,7 @@
     <button class="btn btn-success" data-toggle="modal" data-target="#myModal">New Ing</button>
     <button class="btn btn-success" data-toggle="modal" data-target="#myModal2">New Cat</button>
     
-    <form ng-submit="addRecipe()">
+    <form>
         <ul class="form-style-1 formLi">
             <li><label>Name and catagory of recipe <span class="required">*</span>
                 </label><input type="text" name="field1" class="field-divided" placeholder="Name" maxlength="50"ng-model="ingName"/>
@@ -26,7 +26,7 @@
             </li>
             <li>
                 <label>Ingredient Information <span class="required">*</span></label>
-                <select name="field4" class="field-select" ng-model="ingred">
+                <select name="field4" class="field-select" ng-model="ingred" autocomplete="on" placeholder="Name of ingredient">
                     <option ng-repeat="ing in ingredients" value="{{ing.id}}">{{ing.name}}</option>
                 </select><input class="field4Input" type="text" maxlength="6" size="6" ng-model="amount" placeholder="Amount">
             </li>
@@ -43,7 +43,7 @@
                 <button class="btn btn-danger" ng-click="emptyList()">Empty List from ings</button>
             </li>
             <li>
-                <input type="submit" value="Submit" />
+                <button class="btn btn-success" ng-click="addRecipe()">Submit Recipe</button>
             </li>
             <h3 id="errors" ng-model="errors"></h3>
             <li>test {{ingred}}:{{amount}}</li>
@@ -73,7 +73,7 @@
 
                     <br/>
                     <div class="modal-footer">
-                        <input type="submit" value="Add Ing" class="btn btn-block btn-info"/>
+                        <input type="submit" value="Submit Ing" class="btn btn-block btn-info"/>
                     </div></form>
             </div>
 
@@ -92,14 +92,15 @@
             <div class="modal-body">
 
                 <form ng-submit="addCat()">
-                    <span><span class="distance"><label><span class="ing">Name of category</span><input type="text" class="inputIngAdd" maxlength="30" ng-model="modalCatName">
+                    <span><span class="distance"><label><span class="ing">Name of category</span>
+                                <input type="text" class="inputIngAdd" maxlength="30" ng-model="modalCatName">
                             </label></span><br/>
 
                     </span>
 
                     <br/>
                     <div class="modal-footer">
-                        <input type="submit" value="Add Ing" class="btn btn-block btn-info"/>
+                        <input type="submit" value="Submit Category" class="btn btn-block btn-info"/>
                     </div></form>
             </div>
 

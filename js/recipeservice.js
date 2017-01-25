@@ -94,18 +94,52 @@ module.service("recipeService", function ($q, $http, $rootScope) {
         list.push(ing + " " + amount + "-");
         return list;
     };
+    this.addCat = function(name){
+        var data = {
+            name: name
+        };
+        var url = "http://localhost:8080/RecipeServer.0.1/webresources/category";
+        var auth = "Basic " + window.btoa($rootScope.user + ":" + $rootScope.pass);
+        $http({
+            url: url,
+            method: "POST",
+            data: data,
+            headers: {'Authorization': auth}}).then(function (data, status) {
+            console.log(data);
+            console.log(status);
+            console.log("Fixade Att lägga in category");
+        });
+    };
     this.addRecipe = function (name, cat, info, inglist, instruction, image) {
         console.log(inglist.length);
-        var ings ="";
+        var ings = "";
         for (var i = 0; i < inglist.length; i++) {
             console.log("Trying to print ings");
             console.log(inglist[i]);
-            ings = ings+inglist[i];
+            ings = ings + inglist[i];
         }
         console.log("here's ings " + ings);
-        var insert = {
+        var data = {
             name: name,
-            cat: cat
+            cat: cat,
+            'basic-inf': info,
+            ing: ings,
+            inst: instruction,
+            'img-link': image
         };
+        var url = "http://localhost:8080/RecipeServer.0.1/webresources/recipe";
+        var auth = "Basic " + window.btoa($rootScope.user + ":" + $rootScope.pass);
+        console.log(data);
+
+        $http({
+            url: url,
+            method: "POST",
+            data: data,
+            headers: {'Authorization': auth}}).then(function (data, status) {
+            console.log(data);
+            console.log(status);
+            console.log("Fixade Att lägga in rec");
+        });
     };
+
 });

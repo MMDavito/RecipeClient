@@ -66,6 +66,7 @@ module.controller("addrecipeCtrl", function ($scope, $rootScope, recipeService) 
         console.log("du komer till login");
         recipeService.loggIn($scope.username, $scope.password);
     };
+
     $scope.listIngs = function () {
         if (!Number($scope.ingred) || !$scope.amount) {
             $scope.amount = "fail";
@@ -87,7 +88,7 @@ module.controller("addrecipeCtrl", function ($scope, $rootScope, recipeService) 
     };
     $scope.emptyList = function () {
         $scope.inglist = new Array();
-        $scope.ingslist = "";
+        $scope.inglist2 = "";
     };
     $scope.addIng = function () {
         console.log("I see that you want to add recipe");
@@ -100,6 +101,15 @@ module.controller("addrecipeCtrl", function ($scope, $rootScope, recipeService) 
 
         console.log($scope.modalIngName, $scope.modalIngInfo);
         recipeService.addIng($scope.modalIngName, $scope.modalIngInfo);
+    };
+    $scope.addCat = function () {
+        if (!$scope.modalCatName) {
+            $scope.modalCatName = "YOU MUST WRITE HERE";
+            return;
+        } else {
+            recipeService.addCat($scope.modalCatName);
+            $scope.modalCatName = "";
+        }
     };
     $scope.addRecipe = function () {
         if (!$scope.ingName || !$scope.cat || !$scope.inglist || !$scope.ingInstruction) {
@@ -115,7 +125,7 @@ module.controller("addrecipeCtrl", function ($scope, $rootScope, recipeService) 
             if (!$scope.image) {
                 $scope.image = "";
             }
-            recipeService.addRecipe($scope.ingName, $scope.cat, $scope.recipeInfo, $scope.inglist, $scope.ingInstruction, $scope.image);
+            recipeService.addRecipe($scope.ingName, Number($scope.cat), $scope.recipeInfo, $scope.inglist, $scope.ingInstruction, $scope.image);
 
         }
 
