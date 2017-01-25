@@ -102,18 +102,21 @@ module.controller("addrecipeCtrl", function ($scope, $rootScope, recipeService) 
         recipeService.addIng($scope.modalIngName, $scope.modalIngInfo);
     };
     $scope.addRecipe = function () {
-        if (!$scope.ingName || !$scope.cat || !$scope.amount || !$scope.ingred || !scope.inglist) {
+        if (!$scope.ingName || !$scope.cat || !$scope.inglist || !$scope.ingInstruction) {
             document.getElementById("errors").innerHTML = "You must fill required fields!";
             console.log("You gotta fill it");
             return;
         } else {
+            console.log($scope.inglist.length);
+            console.log("Trying to add recipe");
             if (!$scope.recipeInfo) {
                 $scope.recipeInfo = "";
             }
-
             if (!$scope.image) {
                 $scope.image = "";
             }
+            recipeService.addRecipe($scope.ingName, $scope.cat, $scope.recipeInfo, $scope.inglist, $scope.ingInstruction, $scope.image);
+
         }
 
     };

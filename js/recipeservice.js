@@ -94,4 +94,18 @@ module.service("recipeService", function ($q, $http, $rootScope) {
         list.push(ing + " " + amount + "-");
         return list;
     };
+    this.addRecipe = function (name, cat, info, inglist, instruction, image) {
+        console.log(inglist.length);
+        var ings ="";
+        for (var i = 0; i < inglist.length; i++) {
+            console.log("Trying to print ings");
+            console.log(inglist[i]);
+            ings = ings+inglist[i];
+        }
+        console.log("here's ings " + ings);
+        var insert = {
+            name: name,
+            cat: cat
+        };
+    };
 });
